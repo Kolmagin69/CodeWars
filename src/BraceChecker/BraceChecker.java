@@ -31,9 +31,11 @@ public class BraceChecker {
             Character chrFor = arrayChar.get(i);
             for (Character chrForeach : standardChar) {
                 if (chrFor == chrForeach) {
-                    if (arrayChar.get(i - 1) != oppositeBrackets(chrFor)) {
+                    if (i == 0)
                         return false;
-                    }
+                    if (arrayChar.get(i - 1) != oppositeBrackets(chrFor))
+                        return false;
+
                     arrayCharLocal.remove(i);
                     i--;
                     arrayCharLocal.remove(i);

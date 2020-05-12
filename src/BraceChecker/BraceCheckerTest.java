@@ -14,7 +14,7 @@ class BraceCheckerTest {
         String inputStr3 = "({[]])";
         String inputStr4 = "()[){}";
         String inputStr5 = "([)]";
-        String inputStr6 = ")";
+        String inputStr6 = "))";
 
         assertTrue(braceChecker.isValid(inputStr1));
         assertTrue(braceChecker.isValid(inputStr2));
