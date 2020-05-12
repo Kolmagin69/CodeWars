@@ -18,6 +18,5 @@ class BraceCheckerTest {
         assertTrue(braceChecker.isValid(inputStr2));
         assertFalse(braceChecker.isValid(inputStr3));
         assertFalse(braceChecker.isValid(inputStr4));
-
     }
 }
