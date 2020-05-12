@@ -34,13 +34,14 @@ public class BraceChecker {
                     if (arrayChar.get(i - 1) != oppositeBrackets(chrFor)) {
                         return false;
                     }
-                    arrayChar.remove(i);
+                    arrayCharLocal.remove(i);
                     i--;
-                    arrayChar.remove(i);
+                    arrayCharLocal.remove(i);
                     i--;
                 }
             }
         }
+        if (arrayCharLocal.size() != 0) return false;
         return  true;
     }
 
