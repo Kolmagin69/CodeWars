@@ -5,67 +5,79 @@ import java.util.Map;
 
 public class RomanNumber {
     public String toRoman(int number) {
+        if (number == 0) return "";
+        if (number < 0 || number > 9999)
+            throw new IllegalArgumentException();
         String numToStr = String.valueOf(number);
         int length = numToStr.length();
-        RomanLib lib = new RomanLib();
         String result = "";
-            if (length == 1)
-               return lib.romanNum.get(number);
-            if (length == 2) {
-                int firstNum = numToStr.charAt(0) - 48;
-                int secondNum = numToStr.charAt(1) - 48;
-
-
-
-
-        }
-        return "";
+        if (length == 1)
+            return creator(number, length);
+        int counter = length;
+        for (int i : numToStr.toCharArray())
+            result += creator(convertChr(i), length--);
+        return result;
     }
-    private class RomanLib {
+        private int convertChr (int number) {
+            return number - 48;
+    }
 
-        Map<Integer, String> romanNum = new HashMap<Integer, String>() {{
-            put(1,"I"); put(2,"II"); put(3,"III"); put(4,"IV"); put(5,"V");
-            put(6,"VI"); put(7,"VII"); put(8,"VIII"); put(9,"IX"); put(10,"X");
-            put(50,"L"); put(100,"C"); put(500,"D"); put(1000,"M");
-        }};
-        public String creator(int number, int counter) {
-            String str = "";
-            int key = getKey(number * (int)Math.pow(10, counter - 1));
-            String numberStr = romanNum.get(key);
-            if ( number < 5) {
+        public String creator(int number, int length) {
+            String line = ruleOfTree(length);
+            String firstChr = String.valueOf(line.charAt(0));
+            String secondChr = String.valueOf(line.charAt(1));
+            String thirdChr = String.valueOf(line.charAt(2));
+            String result = "";
+            if (number == 0)
+                return result;
+            if (number == 1)
+                return firstChr;
+            if (1 < number && number < 4) {
                 for (int i = 0; i < number; i++) {
-                    str += numberStr;
+                    result += firstChr;
                 }
-            } else {
-                for (int i = 5; i <= number; i++) {
-                    str += numberStr;
-                }
+                return result;
             }
-            return str;
+            if (length < 4) {
+                if (number == 4)
+                    return firstChr + secondChr;
+                if (4 < number && number < 9) {
+                    result = secondChr;
+                    for (int i = 5; i < number; i++) {
+                        result += firstChr;
+                    }
+                    return result;
+                }
+                if (number == 9)
+                    return firstChr + thirdChr;
+            }
+            if (length == 4) {
+                for (int i = 0; i < number; i++) {
+                    result += firstChr;
+                }
+                return result;
+            }
+            throw new IllegalArgumentException();
         }
 
-        public int getKey(int number) {
-            if ( number < 11)
-                return number;
-            if (number < 50)
-                return 10;
-            if (number < 100)
-                return 50;
-            if (number < 500)
-                return 100;
-            if (number < 1000)
-                return 500;
-            return 1000;
+        public String ruleOfTree(int length) {
+            if (length == 1)
+                return "IVX";
+            if (length == 2)
+                return "XLC";
+            if (length == 3)
+                return "CDM";
+            return "MMM";
         }
 
-    }
+
+
 
     public static void main(String[] args) {
         RomanNumber romanNumber = new RomanNumber();
-        RomanLib lib = romanNumber.new RomanLib();
-        System.out.println(lib.creator(7,2));
-        System.out.println(lib.creator(6,3));
-        System.out.println(lib.creator(4,3));
+        ConsoleScanner scanner = new ConsoleScanner();
+        while (true)
+            System.out.println(romanNumber.toRoman(scanner.nextNumber()));
 
     }
 
