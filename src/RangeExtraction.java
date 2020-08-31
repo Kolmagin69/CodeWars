@@ -3,17 +3,19 @@ import java.util.Arrays;
 public class RangeExtraction {
 
     public static String rangeExtraction(int[] arr) {
-        StringBuilder result = new StringBuilder("\"");
+        StringBuilder result = new StringBuilder();
         Arrays.sort(arr);
         int size = arr.length;
         int counterEquals = 0;
         for (int i = 0; i < size; i++) {
             int current = arr[i];
-            int next = arr[i + 1];
             if (i == size - 1) {
-                result.append(current).append("\"");
+                if (counterEquals == 1)
+                    result.append(",");
+                result.append(current);
                 break;
             }
+            int next = arr[i + 1];
             if (current != next - 1) {
                 if (counterEquals == 1)
                     result.append(",");
@@ -21,14 +23,15 @@ public class RangeExtraction {
                 counterEquals = 0;
             }
             if (current == next - 1) {
-               counterEquals++;
-               if (counterEquals == 1)
-                   result.append(current);
-               if (counterEquals == 2)
-                   result.append("-");
+                counterEquals++;
+                if (counterEquals == 1)
+                    result.append(current);
+                if (counterEquals == 2)
+                    result.append("-");
             }
         }
         return result.toString();
+
     }
 
 
