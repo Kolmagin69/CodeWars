@@ -40,7 +40,6 @@ public class NextSmaller {
             Integer actual = numbers[y];
             Optional<Integer> sortedNumbers = Stream.of(numbers).sorted(Collections.reverseOrder()).findFirst();
             if (sortedNumbers.get() > actual) {
-                System.out.println("start");
                 for (int j = 1; j <= y; j++) {
                     int position = y - j;
                     Integer next = numbers[position];

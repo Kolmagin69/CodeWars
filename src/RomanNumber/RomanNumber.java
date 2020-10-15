@@ -7,7 +7,7 @@ public class RomanNumber {
     public String toRoman(int number) {
         if (number == 0) return "";
         if (number < 0 || number > 9999)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("min 0 , max 9999");
         String numToStr = String.valueOf(number);
         int length = numToStr.length();
         String result = "";

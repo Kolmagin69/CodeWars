@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class RangeExtraction {
+    private RangeExtraction(){}
 
     public static String rangeExtraction(int[] arr) {
         StringBuilder result = new StringBuilder();
